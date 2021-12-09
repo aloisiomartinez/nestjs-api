@@ -7,34 +7,33 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { Custumer } from '../models/custumer.model';
+import { Result } from '../models/result.model';
 
 @Controller('v1/customers')
 export class CustomerController {
   @Get()
   get() {
-    return 'Obter os clients';
+    return new Result(null, true, [], null);
   }
 
   @Get(':document')
   getById(@Param('document') document) {
-    return 'Obter os clients' + document;
+    return new Result(null, true, {}, null);
   }
 
   @Post()
-  post(@Body() Body) {
-    return Body;
+  post(@Body() body: Custumer) {
+    return new Result('Cliente criado com sucesso!', true, body, null);
   }
 
   @Put(':document')
-  put(@Param('document') document, @Body() Body) {
-    return {
-      customer: document,
-      data: Body,
-    };
+  put(@Param('document') document, @Body() body) {
+    return new Result('Cliente alterado com sucesso!', true, body, null);
   }
 
   @Delete(':document')
   delete(@Param('document') document) {
-    return 'Remover os clients';
+    return new Result('Cliente removido com sucesso!', true, null, null);
   }
 }
