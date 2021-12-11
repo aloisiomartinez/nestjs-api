@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
 import { CreateCustomerContract } from '../contracts/customer.contracts';
-import { Custumer } from '../models/custumer.model';
+import { CreateCustomerDTO } from '../dtos/create-custumer-dt';
 import { Result } from '../models/result.model';
 
 @Controller('v1/customers')
@@ -27,7 +27,7 @@ export class CustomerController {
 
   @Post()
   @UseInterceptors(new ValidatorInterceptor(new CreateCustomerContract()))
-  post(@Body() body: Custumer) {
+  post(@Body() body: CreateCustomerDTO) {
     return new Result('Cliente criado com sucesso!', true, body, null);
   }
 
