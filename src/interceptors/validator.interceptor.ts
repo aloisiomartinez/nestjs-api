@@ -22,7 +22,7 @@ export class ValidatorInterceptor implements NestInterceptor {
 
     if (!valid) {
       throw new HttpException(
-        new Result('Ops, algo deu errado', false, null, this.contract.errors),
+        new Result('Ops, algo saiu errado', false, null, this.contract.errors),
         HttpStatus.BAD_REQUEST,
       );
     }
