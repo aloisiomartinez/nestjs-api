@@ -35,7 +35,6 @@ export class CustomerController {
     const user = await this.accountService.create(
       new User(model.document, model.password, true),
     );
-
     return new Result('Cliente criado com sucesso!', true, user, null);
   }
 

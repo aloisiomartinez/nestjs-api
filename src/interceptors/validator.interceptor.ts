@@ -13,10 +13,7 @@ import { Result } from 'src/backoffce/models/result.model';
 @Injectable()
 export class ValidatorInterceptor implements NestInterceptor {
   constructor(public contract: Contract) {}
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler<any>,
-  ): any | Promise<any> {
+  intercept(context: ExecutionContext, next: CallHandler): any | Promise<any> {
     const body = context.switchToHttp().getRequest().body;
     const valid = this.contract.validate(body);
 
@@ -27,6 +24,6 @@ export class ValidatorInterceptor implements NestInterceptor {
       );
     }
 
-    return next;
+    return next.handle();
   }
 }
