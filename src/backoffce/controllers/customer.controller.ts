@@ -20,6 +20,8 @@ import { CustomerService } from '../services/customer.service';
 import { Customer } from '../models/customer.model';
 import { Address } from '../models/address.model';
 import { CreateAddressContract } from '../contracts/customer/create-address.contract';
+import { CreatePetContract } from '../contracts/pet/create-pet.contract';
+import { Pet } from '../models/pet.model';
 
 @Controller('v1/customers')
 export class CustomerController {
@@ -27,16 +29,6 @@ export class CustomerController {
     private readonly accountService: AccountService,
     private readonly customerService: CustomerService,
   ) {}
-
-  @Get()
-  get() {
-    return new Result(null, true, [], null);
-  }
-
-  @Get(':document')
-  getById(@Param('document') document) {
-    return new Result(null, true, {}, null);
-  }
 
   @Post()
   @UseInterceptors(new ValidatorInterceptor(new CreateCustomerContract()))
@@ -50,7 +42,7 @@ export class CustomerController {
         model.name,
         model.document,
         model.email,
-        null,
+        [],
         null,
         null,
         null,
@@ -120,13 +112,17 @@ export class CustomerController {
     }
   }
 
-  @Put(':document')
-  put(@Param('document') document, @Body() body) {
-    return new Result('Cliente alterado com sucesso!', true, body, null);
-  }
-
-  @Delete(':document')
-  delete(@Param('document') document) {
-    return new Result('Cliente removido com sucesso!', true, null, null);
+  @Post(':document/pets')
+  @UseInterceptors(new ValidatorInterceptor(new CreatePetContract()))
+  async createPet(@Param('document') document, @Body() model: Pet) {
+    try {
+      const res = await this.customerService.createPet(document, model);
+      return new Result(null, true, res, null);
+    } catch (error) {
+      throw new HttpException(
+        new Result('Não foi possível criar seu pet', false, null, error),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }
