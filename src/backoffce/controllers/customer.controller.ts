@@ -5,6 +5,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -37,24 +39,36 @@ export class CustomerController {
   @Post()
   @UseInterceptors(new ValidatorInterceptor(new CreateCustomerContract()))
   async post(@Body() model: CreateCustomerDTO) {
-    const user = await this.accountService.create(
-      new User(model.document, model.password, true),
-    );
+    try {
+      const user = await this.accountService.create(
+        new User(model.document, model.password, true),
+      );
 
-    const customer = new Customer(
-      model.name,
-      model.document,
-      model.email,
-      null,
-      null,
-      null,
-      null,
-      user,
-    );
+      const customer = new Customer(
+        model.name,
+        model.document,
+        model.email,
+        null,
+        null,
+        null,
+        null,
+        user,
+      );
 
-    const res = await this.customerService.create(customer);
+      const res = await this.customerService.create(customer);
 
-    return new Result('Cliente criado com sucesso!', true, res, null);
+      return new Result('Cliente criado com sucesso!', true, res, null);
+    } catch (error) {
+      throw new HttpException(
+        new Result(
+          'Não foi possível realizar o seu cadastro',
+          false,
+          null,
+          error,
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Put(':document')
