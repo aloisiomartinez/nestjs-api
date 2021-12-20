@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Customer } from '../models/customer.model';
+import { Address } from '../models/address.model';
 
 @Injectable()
 export class CustomerService {
@@ -13,5 +14,17 @@ export class CustomerService {
     const customer = new this.model(data);
 
     return await customer.save();
+  }
+
+  async addBillingAddress(document: string, data: Address): Promise<Customer> {
+    return await this.model.findOneAndUpdate(
+      { document },
+      {
+        $set: {
+          billingAddress: data,
+        },
+      },
+      { upsert: true },
+    );
   }
 }

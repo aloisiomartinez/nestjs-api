@@ -13,11 +13,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
-import { CreateCustomerContract } from '../contracts/customer.contracts';
+import { CreateCustomerContract } from '../contracts/customer/create-customer.contract';
 import { CreateCustomerDTO } from '../dtos/create-customer-dto';
 import { Result } from '../models/result.model';
 import { CustomerService } from '../services/customer.service';
 import { Customer } from '../models/customer.model';
+import { Address } from '../models/address.model';
+import { CreateAddressContract } from '../contracts/customer/create-address.contract';
 
 @Controller('v1/customers')
 export class CustomerController {
@@ -62,6 +64,28 @@ export class CustomerController {
       throw new HttpException(
         new Result(
           'Não foi possível realizar o seu cadastro',
+          false,
+          null,
+          error,
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Post(':document/addresses/billing')
+  @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
+  async addBillingAddressput(
+    @Param('document') document,
+    @Body() model: Address,
+  ) {
+    try {
+      const res = await this.customerService.addBillingAddress(document, model);
+      return res;
+    } catch (error) {
+      throw new HttpException(
+        new Result(
+          'Não foi possível adicionar o seu endereço',
           false,
           null,
           error,
