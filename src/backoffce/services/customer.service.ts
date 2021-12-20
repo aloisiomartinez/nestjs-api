@@ -27,4 +27,16 @@ export class CustomerService {
       { upsert: true },
     );
   }
+
+  async addShippingAddress(document: string, data: Address): Promise<Customer> {
+    return await this.model.findOneAndUpdate(
+      { document },
+      {
+        $set: {
+          shippingAddress: data,
+        },
+      },
+      { upsert: true },
+    );
+  }
 }
