@@ -143,4 +143,30 @@ export class CustomerController {
       );
     }
   }
+
+  @Get()
+  async getAll() {
+    try {
+      const res = await this.customerService.findAll();
+      return new Result(null, true, res, null);
+    } catch (error) {
+      throw new HttpException(
+        new Result('Não foi listar os clientes', false, null, error),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Get(':document')
+  async get(@Param('document') document) {
+    try {
+      const res = await this.customerService.find(document);
+      return new Result(null, true, res, null);
+    } catch (error) {
+      throw new HttpException(
+        new Result('Não foi listar os clientes', false, null, error),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
 }
