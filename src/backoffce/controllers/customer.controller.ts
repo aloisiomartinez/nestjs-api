@@ -40,6 +40,7 @@ export class CustomerController {
     const user = await this.accountService.create(
       new User(model.document, model.password, true),
     );
+
     const customer = new Customer(
       model.name,
       model.document,
@@ -50,7 +51,10 @@ export class CustomerController {
       null,
       user,
     );
-    return new Result('Cliente criado com sucesso!', true, user, null);
+
+    const res = await this.customerService.create(customer);
+
+    return new Result('Cliente criado com sucesso!', true, res, null);
   }
 
   @Put(':document')
