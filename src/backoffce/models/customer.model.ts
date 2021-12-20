@@ -3,7 +3,7 @@ import { CreditCard } from './credtir-card.model';
 import { Pet } from './pet.model';
 import { User } from './user.model';
 
-export class Custumer {
+export class Customer {
   constructor(
     public name: string,
     public document: string,
