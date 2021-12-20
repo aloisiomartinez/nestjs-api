@@ -3,7 +3,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BackoffceModule } from './backoffce/backoffce.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('CONNECTION_STRING'), BackoffceModule],
+  imports: [
+    MongooseModule.forRoot(
+      'mongodb+srv://admin:admin@nestpetshoapi.nggxu.mongodb.net/test',
+    ),
+    BackoffceModule,
+  ],
   controllers: [],
   providers: [],
 })
