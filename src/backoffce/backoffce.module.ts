@@ -1,3 +1,4 @@
+import { AccountService } from './services/account.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CustomerController } from './controllers/custumer.controller';
@@ -18,5 +19,6 @@ import { UserSchema } from './schemas/user.shcma';
     ]),
   ],
   controllers: [CustomerController],
+  providers: [AccountService],
 })
 export class BackoffceModule {}
