@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BackoffceModule } from './backoffce/backoffce.module';
+import { BackoffceModule } from './modules/backoffce/backoffce.module';
 
 @Module({
   imports: [

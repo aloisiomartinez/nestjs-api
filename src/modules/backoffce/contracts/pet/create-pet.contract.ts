@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Pet } from 'src/backoffce/models/pet.model';
+import { Pet } from 'src/modules/backoffce/models/pet.model';
 import { Flunt } from 'src/utils/flunt';
 import { Contract } from '../contract';
 

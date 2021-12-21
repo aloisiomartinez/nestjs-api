@@ -66,53 +66,6 @@ export class CustomerController {
     }
   }
 
-  @Post(':document/addresses/billing')
-  @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
-  async addBillingAddressput(
-    @Param('document') document,
-    @Body() model: Address,
-  ) {
-    try {
-      const res = await this.customerService.addBillingAddress(document, model);
-      return new Result(null, true, res, null);
-    } catch (error) {
-      throw new HttpException(
-        new Result(
-          'Não foi possível adicionar o seu endereço',
-          false,
-          null,
-          error,
-        ),
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-  }
-
-  @Post(':document/addresses/shipping')
-  @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
-  async addShippingAddressput(
-    @Param('document') document,
-    @Body() model: Address,
-  ) {
-    try {
-      const res = await this.customerService.addShippingAddress(
-        document,
-        model,
-      );
-      return new Result(null, true, res, null);
-    } catch (error) {
-      throw new HttpException(
-        new Result(
-          'Não foi possível adicionar o seu endereço',
-          false,
-          null,
-          error,
-        ),
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-  }
-
   @Post(':document/pets')
   @UseInterceptors(new ValidatorInterceptor(new CreatePetContract()))
   async createPet(@Param('document') document, @Body() model: Pet) {
