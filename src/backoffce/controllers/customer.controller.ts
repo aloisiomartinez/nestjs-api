@@ -22,6 +22,7 @@ import { Address } from '../models/address.model';
 import { CreateAddressContract } from '../contracts/customer/create-address.contract';
 import { CreatePetContract } from '../contracts/pet/create-pet.contract';
 import { Pet } from '../models/pet.model';
+import { QueryDto } from '../dtos/query-dto';
 
 @Controller('v1/customers')
 export class CustomerController {
@@ -161,6 +162,19 @@ export class CustomerController {
   async get(@Param('document') document) {
     try {
       const res = await this.customerService.find(document);
+      return new Result(null, true, res, null);
+    } catch (error) {
+      throw new HttpException(
+        new Result('Não foi listar os clientes', false, null, error),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Post('query')
+  async query(@Body() model: QueryDto) {
+    try {
+      const res = await this.customerService.query(model);
       return new Result(null, true, res, null);
     } catch (error) {
       throw new HttpException(
