@@ -8,6 +8,7 @@ import { CustomerService } from './services/customer.service';
 import { AddressService } from './services/address.service';
 import { PetService } from './services/pet.service';
 import { AddressController } from './controllers/address.controller';
+import { PetController } from './controllers/pet.controller';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AddressController } from './controllers/address.controller';
       },
     ]),
   ],
-  controllers: [CustomerController, AddressController],
+  controllers: [CustomerController, AddressController, PetController],
   providers: [AccountService, CustomerService, AddressService, PetService],
 })
 export class BackoffceModule {}
