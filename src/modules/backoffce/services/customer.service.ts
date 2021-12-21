@@ -5,6 +5,7 @@ import { Customer } from '../models/customer.model';
 import { Address } from '../models/address.model';
 import { Pet } from '../models/pet.model';
 import { QueryDto } from '../dtos/query-dto';
+import { UpdateCustomerDto } from '../dtos/customer/update-customer-dto';
 
 @Injectable()
 export class CustomerService {
@@ -16,6 +17,10 @@ export class CustomerService {
     const customer = new this.model(data);
 
     return await customer.save();
+  }
+
+  async update(document: string, data: UpdateCustomerDto): Promise<Customer> {
+    return await this.model.findOneAndUpdate({ document }, data);
   }
 
   async findAll(): Promise<Customer[]> {
@@ -33,5 +38,18 @@ export class CustomerService {
     return await this.model
       .find(model.query, model.fields, { skip: model.skip, limit: model.take })
       .exec();
+  }
+
+  async saveOrUpdateCreditCard(document: string, data: any): Promise<Customer> {
+    const options = { upsert: true };
+    return await this.model.findOneAndUpdate(
+      { document },
+      {
+        $set: {
+          card: data,
+        },
+      },
+      options,
+    );
   }
 }
