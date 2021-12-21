@@ -10,7 +10,7 @@ import {
 import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
 import { Result } from '../models/result.model';
 import { Address } from '../models/address.model';
-import { CreateAddressContract } from '../contracts/customer/create-address.contract';
+import { CreateAddressContract } from '../contracts/address/create-address.contract';
 import { AddressService } from '../services/address.service';
 import { AddressType } from 'src/modules/enums/address-type.enum';
 

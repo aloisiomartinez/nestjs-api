@@ -3,13 +3,11 @@ import { AccountService } from './../services/account.service';
 import {
   Body,
   Controller,
-  Delete,
   Get,
   HttpException,
   HttpStatus,
   Param,
   Post,
-  Put,
   UseInterceptors,
 } from '@nestjs/common';
 import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
@@ -18,10 +16,6 @@ import { CreateCustomerDTO } from '../dtos/create-customer-dto';
 import { Result } from '../models/result.model';
 import { CustomerService } from '../services/customer.service';
 import { Customer } from '../models/customer.model';
-import { Address } from '../models/address.model';
-import { CreateAddressContract } from '../contracts/customer/create-address.contract';
-import { CreatePetContract } from '../contracts/pet/create-pet.contract';
-import { Pet } from '../models/pet.model';
 import { QueryDto } from '../dtos/query-dto';
 
 @Controller('v1/customers')
