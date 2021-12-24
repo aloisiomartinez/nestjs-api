@@ -5,7 +5,7 @@ import { Customer } from '../models/customer.model';
 import { Address } from '../models/address.model';
 import { Pet } from '../models/pet.model';
 import { QueryDto } from '../dtos/query-dto';
-import { AddressType } from 'src/modules/enums/address-type.enum';
+import { AddressType } from '../enums/address-type.enum';
 
 @Injectable()
 export class AddressService {

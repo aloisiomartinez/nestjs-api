@@ -12,7 +12,7 @@ import { Result } from '../models/result.model';
 import { Address } from '../models/address.model';
 import { CreateAddressContract } from '../contracts/address/create-address.contract';
 import { AddressService } from '../services/address.service';
-import { AddressType } from 'src/modules/enums/address-type.enum';
+import { AddressType } from '../enums/address-type.enum';
 
 @Controller('v1/address')
 export class AddressController {
