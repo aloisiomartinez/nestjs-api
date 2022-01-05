@@ -12,4 +12,8 @@ export class AccountService {
 
     return await user.save();
   }
+
+  async findOneByUsarname(username) {
+    return new User(username, "123456789", true)
+  }
 }
