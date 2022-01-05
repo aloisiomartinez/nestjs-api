@@ -1,4 +1,4 @@
-import { Controller, HttpException, HttpStatus, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, HttpException, HttpStatus, Get, Post, Body, Param } from '@nestjs/common';
 import { OrderService } from 'src/modules/store/services/order.service';
 import { Result } from 'src/modules/backoffce/models/result.model';
 import { Order } from 'src/modules/store/entities/order.entity';
@@ -6,7 +6,6 @@ import { OrderItemDto } from '../dtos/order-item.dto';
 import { OrderItem } from '../entities/order-item.entity';
 import { ProductService } from '../services/product.service';
 import { OrderItemService } from '../services/order-item.service';
-import { Product } from '../entities/product.entity';
 
 @Controller('v1/orders')
 export class OrderController {
