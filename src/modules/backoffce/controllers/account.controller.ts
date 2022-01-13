@@ -9,7 +9,7 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/shared/guards/auth.guard';
+import { JwtAuthGuard } from 'src/modules/shared/guards/auth.guard';
 import { AuthService } from 'src/shared/services/auth.service';
 import { AuthenticateDto } from '../dtos/account/authenticate.dto';
 import { ResetPasswordDto } from '../dtos/account/reset-password.dto';
