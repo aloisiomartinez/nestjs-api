@@ -1,5 +1,5 @@
 import { AccountService } from './services/account.service';
-import { CacheModule, Module } from '@nestjs/common';
+import { CacheModule, HttpModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CustomerController } from './controllers/customer.controller';
 import { CustomerSchema } from './schemas/customer.schema';
@@ -11,6 +11,9 @@ import { AddressController } from './controllers/address.controller';
 import { PetController } from './controllers/pet.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { AuthService } from '../shared/services/auth.service';
+import { JwtStrategy } from '../shared/strategies/jwt.strategy';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
   imports: [
